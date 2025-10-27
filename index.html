@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Statistik Kabupaten Sleman</title>
+    <style>
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2, h3 {
+            margin: 5px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(to right, #f9d423, #ff4e50);
+            color: #fff;
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
+        }
+
+        .header img {
+            height: 300px;
+        }
+
+        /* Informasi */
+        .info {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .info h2 {
+            color: #444;
+        }
+
+        /* Wisata */
+        .wisata {
+            width: 80%;
+            margin: 20px auto;
+            background: #fffbea;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .wisata th {
+            font-size: 1.2em;
+            background: #ffe066;
+            padding: 10px;
+        }
+
+        .wisata img {
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        /* Tabel Penduduk */
+        .tabel-container {
+            width: 85%;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .tabel-container h2 {
+            background: #ffcc00;
+            color: #222;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f9d423;
+            color: #333;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fff9e6;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #ffec80;
+            transition: 0.3s;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Lambang_Kabupaten_Sleman.png" 
+             alt="Logo Kabupaten Sleman">
+        <h3>Sistem Informasi Statistik</h3>
+        <h2>Kabupaten Sleman Tahun 2025</h2>
+    </div>
+
+    <!-- Informasi Kabupaten -->
+    <div class="info">
+        <h2>Kabupaten Sleman</h2>
+        <p align="justify">
+            Kabupaten Sleman adalah salah satu kabupaten di Daerah Istimewa Yogyakarta, Indonesia. 
+            Sleman terletak di bagian utara DIY dan merupakan wilayah penyangga utama Kota Yogyakarta. 
+            Kabupaten ini terkenal dengan Gunung Merapi, kawasan wisata Kaliurang, dan pusat pendidikan tinggi seperti Universitas Gadjah Mada.
+        </p>
+    </div>
+
+    <!-- Wisata -->
+    <div class="wisata">
+        <table width="100%" cellpadding="10">
+            <tr>
+                <th colspan="2">Wisata Kabupaten Sleman</th>
+            </tr>
+            <tr>
+                <td width="150px">
+                    <img src="https://travelspromo.com/wp-content/uploads/2019/03/Gedung-Museum-Gunung-Merapi.-Foto-Gmap-Adjat-Sudrajat-1200x900.jpg" 
+                         alt="Museum Gunungapi Merapi" width="150px">
+                </td>
+                <td>
+                    <b>Museum Gunungapi Merapi</b><br>
+                    Terletak di Kaliurang, museum ini menjadi tempat edukasi tentang aktivitas vulkanik Merapi dan sejarah letusannya.
+                    Museum ini merupakan salah satu ikon wisata edukatif di Sleman.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Data Kependudukan -->
+    <div class="tabel-container">
+        <h2>Data Kependudukan Kabupaten Sleman</h2>
+        <table>
+            <tr>
+                <th>Kecamatan</th>
+                <th>Luas Wilayah (km²)</th>
+                <th>Jumlah Penduduk</th>
+                <th>Kepadatan (/km²)</th>
+            </tr>
+            <tr><td>Ngaglik</td><td>44,45</td><td>123.456</td><td>2.778</td></tr>
+            <tr><td>Depok</td><td>25,18</td><td>140.987</td><td>5.598</td></tr>
+            <tr><td>Gamping</td><td>42,63</td><td>115.343</td><td>2.706</td></tr>
+            <tr><td>Sleman</td><td>39,27</td><td>98.764</td><td>2.515</td></tr>
+            <tr><td>Kalasan</td><td>37,15</td><td>102.578</td><td>2.761</td></tr>
+            <tr><td>Minggir</td><td>36,10</td><td>65.432</td><td>1.812</td></tr>
+            <tr><td>Berbah</td><td>31,47</td><td>79.654</td><td>2.531</td></tr>
+            <tr><td>Cangkringan</td><td>42,81</td><td>57.983</td><td>1.355</td></tr>
+            <tr><td>Turi</td><td>49,12</td><td>71.248</td><td>1.451</td></tr>
+            <tr><td>Pakem</td><td>45,09</td><td>60.789</td><td>1.348</td></tr>
+        </table>
+    </div>
+
+    <footer>
+        &copy; 2025 Sistem Informasi Statistik Kabupaten Sleman
+    </footer>
+
+</body>
+</html>
+
