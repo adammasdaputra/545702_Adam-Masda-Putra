@@ -172,6 +172,11 @@ Kategori Wisata
 Radius Buffer
 </div>
 
+<div class="stat-box">
+<h3 id="rataJarak">0 km</h3>
+Rata-rata Jarak Wisata
+</div>
+
 </div>
 
 </div>
@@ -185,7 +190,15 @@ Radius Buffer
 
 <h2>Data Destinasi Wisata</h2>
 
-<table>
+<table id="tabelWisata">
+<tr>
+<th>No</th>
+<th>Nama Wisata</th>
+<th>Kategori</th>
+<th>Kabupaten/Kota</th>
+<th>Jarak dari Malioboro (km)</th>
+</tr>
+</table>
 <tr>
 <th>No</th>
 <th>Nama Wisata</th>
@@ -317,6 +330,13 @@ defaultMarkGeocode:true
 ===================================== */
 
 var malioboro = [-7.7929,110.3658];
+L.Routing.control({
+waypoints: [
+L.latLng(-7.7929,110.3658),
+L.latLng(-7.7520,110.4915)
+],
+routeWhileDragging:false
+}).addTo(map);
 
 var semuaWisata = [
 ["Keraton Yogyakarta",-7.8053,110.3642],
@@ -386,7 +406,65 @@ jarak+" km"
 );
 
 });
-</script>
+var totalJarak = 0;
 
+semuaWisata.forEach(function(w){
+
+totalJarak += hitungJarak(
+malioboro[0],
+malioboro[1],
+w[1],
+w[2]
+);
+
+});
+/* =====================================
+   RATA-RATA JARAK WISATA
+===================================== */
+
+var totalJarak = 0;
+
+semuaWisata.forEach(function(w){
+
+totalJarak += hitungJarak(
+malioboro[0],
+malioboro[1],
+w[1],
+w[2]
+);
+
+});
+
+var rata = totalJarak / semuaWisata.length;
+
+document.getElementById("rataJarak").innerHTML =
+rata.toFixed(2) + " km";
+
+var rata = totalJarak / semuaWisata.length;
+
+console.log("Rata-rata jarak =", rata);
+
+var tabel = document.getElementById("tabelWisata");
+
+semuaWisata.forEach(function(w,index){
+
+var jarak = hitungJarak(
+malioboro[0],
+malioboro[1],
+w[1],
+w[2]
+).toFixed(2);
+
+var row = tabel.insertRow();
+
+row.insertCell(0).innerHTML = index+1;
+row.insertCell(1).innerHTML = w[0];
+row.insertCell(2).innerHTML = "-";
+row.insertCell(3).innerHTML = "-";
+row.insertCell(4).innerHTML = jarak;
+
+});
+</script>
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
 </body>
 </html>
