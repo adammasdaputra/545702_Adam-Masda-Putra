@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -23,7 +22,7 @@ background:#f5f6fa;
 position:relative;
 }
 
-/* Ornamen Batik */
+/* Ornamen Batik Global */
 body::before{
 content:"";
 position:fixed;
@@ -39,16 +38,13 @@ pointer-events:none;
 z-index:-1;
 }
 
-/* Header */
+/* HEADER */
 .header{
 background:
-linear-gradient(rgba(0,0,0,0.55),
-rgba(0,0,0,0.55)),
+linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
 url("https://www.bluebirdgroup.com/storage/articles/6729bbdac8b31.jpg");
-
 background-size:cover;
 background-position:center;
-
 color:white;
 text-align:center;
 padding:80px 20px;
@@ -59,21 +55,11 @@ width:110px;
 margin-bottom:15px;
 }
 
-.header h1{
-font-size:3em;
-}
+.header h1{font-size:3em;}
+.header h2{font-weight:300;margin-top:10px;}
+.header p{margin-top:15px;font-size:1.1em;}
 
-.header h2{
-font-weight:300;
-margin-top:10px;
-}
-
-.header p{
-margin-top:15px;
-font-size:1.1em;
-}
-
-/* Konten */
+/* CONTAINER */
 .container{
 width:90%;
 max-width:1200px;
@@ -81,12 +67,36 @@ margin:auto;
 padding:25px;
 }
 
+/* CARD + BATIK MODERN */
 .card{
 background:white;
 padding:25px;
 margin-top:20px;
 border-radius:15px;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
+position:relative;
+overflow:hidden;
+}
+
+/* BATIK TRANSPARAN DI DALAM CARD */
+.card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Batik_pattern.svg/1024px-Batik_pattern.svg.png");
+background-size:250px;
+background-repeat:repeat;
+opacity:0.04;
+z-index:0;
+}
+
+/* isi card tetap di atas batik */
+.card > *{
+position:relative;
+z-index:1;
 }
 
 .card h2{
@@ -94,13 +104,13 @@ margin-bottom:15px;
 color:#2c3e50;
 }
 
-/* Peta */
+/* MAP */
 #map{
 height:650px;
 border-radius:15px;
 }
 
-/* Statistik */
+/* STATISTIK */
 .stats{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -116,7 +126,7 @@ text-align:center;
 border-radius:10px;
 }
 
-/* Tabel */
+/* TABLE */
 table{
 width:100%;
 border-collapse:collapse;
@@ -138,7 +148,7 @@ tr:nth-child(even){
 background:#f9f9f9;
 }
 
-/* Footer */
+/* FOOTER */
 footer{
 background:#2c3e50;
 color:white;
@@ -158,23 +168,19 @@ margin-top:40px;
 src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Coat_of_arms_of_Yogyakarta.svg">
 
 <h1>WEBGIS PARIWISATA</h1>
-
 <h2>DAERAH ISTIMEWA YOGYAKARTA</h2>
 
-<p>
-Sistem Informasi Geografis Destinasi Wisata DIY
-</p>
+<p>Sistem Informasi Geografis Destinasi Wisata DIY</p>
 
 </div>
 
 <div class="container">
 
 <div class="card">
-
 <h2>Tentang Aplikasi</h2>
 
 <p align="justify">
-Aplikasi WebGIS Pariwisata Daerah Istimewa Yogyakarta merupakan sistem informasi geografis berbasis web yang dirancang untuk menampilkan persebaran destinasi wisata unggulan di wilayah DIY. Aplikasi ini memanfaatkan teknologi pemetaan interaktif untuk menyajikan informasi lokasi wisata alam, budaya, sejarah, dan rekreasi secara spasial sehingga pengguna dapat memahami distribusi objek wisata, memperoleh informasi lokasi, serta mendukung promosi dan pengembangan sektor pariwisata daerah.
+Aplikasi WebGIS Pariwisata Daerah Istimewa Yogyakarta merupakan sistem informasi geografis berbasis web yang dirancang untuk menampilkan persebaran destinasi wisata unggulan di wilayah DIY. Aplikasi ini memanfaatkan teknologi pemetaan interaktif untuk menyajikan informasi lokasi wisata alam, budaya, sejarah, dan rekreasi secara spasial sehingga pengguna dapat memahami distribusi objek wisata.
 </p>
 
 <div class="stats">
@@ -204,19 +210,14 @@ Wilayah Kajian
 </div>
 
 <div class="card">
-
 <h2>Peta Persebaran Wisata DIY</h2>
-
 <div id="map"></div>
-
 </div>
 
 <div class="card">
-
 <h2>Data Destinasi Wisata</h2>
 
 <table>
-
 <tr>
 <th>No</th>
 <th>Objek Wisata</th>
@@ -241,7 +242,6 @@ Wilayah Kajian
 <tr><td>15</td><td>Waduk Sermo</td><td>Alam</td><td>Kulon Progo</td></tr>
 
 </table>
-
 </div>
 
 </div>
@@ -253,18 +253,13 @@ Wilayah Kajian
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-
 var map = L.map('map').setView([-7.82,110.40],10);
 
-L.tileLayer(
-'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-{
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 maxZoom:19
-}
-).addTo(map);
+}).addTo(map);
 
 var wisata = [
-
 ["Malioboro",-7.7929,110.3658],
 ["Keraton Yogyakarta",-7.8053,110.3642],
 ["Taman Sari",-7.8102,110.3593],
@@ -280,21 +275,14 @@ var wisata = [
 ["Goa Pindul",-7.9567,110.6517],
 ["Kalibiru",-7.8058,110.1295],
 ["Waduk Sermo",-7.8436,110.1206]
-
 ];
 
 wisata.forEach(function(tempat){
-
 L.marker([tempat[1],tempat[2]])
 .addTo(map)
-.bindPopup(
-"<b>"+tempat[0]+"</b>"
-);
-
+.bindPopup("<b>"+tempat[0]+"</b>");
 });
-
 </script>
 
 </body>
 </html>
-```
