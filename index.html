@@ -11,155 +11,174 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
 
 <style>
-
-body{
-margin:0;
-font-family:Segoe UI;
-background:#f4f6f9;
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f9;
 }
 
-.header{
-background:url("https://doku.promo/bl-content/uploads/pages/52336870f9b543a500e17dbf36ce9cee/TempatWisataJogjaPalingHits-DOKU.Promo.jpg");
-background-size:cover;
-color:white;
-text-align:center;
-padding:70px;
-font-weight:bold;
+/* HEADER STYLE */
+.header {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://doku.promo/bl-content/uploads/pages/52336870f9b543a500e17dbf36ce9cee/TempatWisataJogjaPalingHits-DOKU.Promo.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
 }
 
-.container{
-width:90%;
-margin:auto;
-padding:20px;
+.header img {
+    height: 60px;
+    margin-bottom: 10px;
 }
 
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-margin-top:20px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+.header h1 {
+    margin: 5px 0;
+    font-size: 24px;
+    letter-spacing: 1px;
 }
 
-#map{
-height:650px;
-border-radius:12px;
-position:relative;
+.header p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
 }
 
-/* PANEL ROUTING */
-#routePanel{
-position:absolute;
-top:15px;
-left:15px;
-z-index:999;
-background:white;
-padding:12px;
-border-radius:10px;
-width:260px;
-box-shadow:0 2px 10px rgba(0,0,0,0.2);
-font-size:13px;
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
 }
 
-#routePanel select{
-width:100%;
-padding:6px;
-margin-top:8px;
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
-#routeResult{
-margin-top:8px;
-font-weight:bold;
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #333;
 }
 
-.stats{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
+/* STATS GRID */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
 }
 
-.stat{
-background:#2c3e50;
-color:white;
-padding:10px;
-text-align:center;
-border-radius:8px;
+.stat {
+    background: #34495e;
+    color: white;
+    padding: 15px 10px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5;
 }
 
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
+.stat span {
+    font-size: 12px;
+    font-weight: normal;
+    display: block;
+    color: #bdc3c7;
 }
 
-th,td{
-border:1px solid #ddd;
-padding:8px;
-text-align:center;
+/* MAP CONTAINER */
+#map {
+    height: 500px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
 }
 
-th{
-background:#2c3e50;
-color:white;
+/* PANEL ROUTING DI BAWAH PETA (DISESUAIKAN) */
+.route-container {
+    margin-top: 15px;
+    font-size: 14px;
 }
 
+.route-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.route-selector select {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+}
+
+#infoJarak {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #2c3e50;
+}
 </style>
 </head>
 
 <body>
 
 <div class="header">
-<h1>WEBGIS PARIWISATA DIY</h1>
-<p>Analisis Persebaran & Aksesibilitas Wisata</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Logo_of_Yogyakarta.svg/1200px-Logo_of_Yogyakarta.svg.png" alt="Logo DIY">
+    <h1>WEBGIS PARIWISATA DIY</h1>
+    <p>Analisis Persebaran dan Aksesibilitas Destinasi Wisata</p>
 </div>
 
 <div class="container">
 
-<div class="card">
+    <div class="card">
+        <h3>Tentang Aplikasi</h3>
+        <p style="font-size: 13px; color: #666; margin-bottom: 20px;">
+            WebGIS ini menampilkan persebaran destinasi wisata DIY, buffer wisata budaya 5 km, serta analisis aksesibilitas menggunakan routing dari Malioboro menuju destinasi wisata.
+        </p>
+        
+        <div class="stats">
+            <div class="stat">5<br><span>Kabupaten/Kota</span></div>
+            <div class="stat">15<br><span>Destinasi Wisata</span></div>
+            <div class="stat">3<br><span>Kategori</span></div>
+            <div class="stat">5 km<br><span>Buffer</span></div>
+        </div>
+    </div>
 
-<h3>Statistik</h3>
+    <div class="card">
+        <h3>Peta Persebaran Wisata DIY</h3>
+        
+        <div id="map"></div>
 
-<div class="stats">
-<div class="stat">5<br>Kab/Kota</div>
-<div class="stat">15<br>Wisata</div>
-<div class="stat">3<br>Kategori</div>
-<div class="stat">5 km<br>Buffer</div>
-<div class="stat"><span id="avg">0</span><br>Rata Jarak</div>
-</div>
-
-</div>
-
-<div class="card">
-<h3>Peta Interaktif</h3>
-<div id="map">
-
-<div id="routePanel">
-<b>Pilih Destinasi</b>
-<select id="selectWisata">
-<option value="">-- Pilih --</option>
-</select>
-
-<div id="routeResult">
-Jarak: -<br>
-Waktu: -
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="card">
-<h3>Tabel Wisata</h3>
-<table id="tabel">
-<tr>
-<th>No</th>
-<th>Nama</th>
-<th>Kategori</th>
-<th>Kabupaten</th>
-<th>Jarak (km)</th>
-</tr>
-</table>
-</div>
+        <div class="route-container">
+            <div class="route-selector">
+                <label><b>Pilih Destinasi dari Malioboro:</b></label>
+                <select id="tujuan">
+                    <option value="">-- Pilih Destinasi --</option>
+                    <option value="-7.8053,110.3642">Keraton Yogyakarta</option>
+                    <option value="-7.8102,110.3593">Taman Sari</option>
+                    <option value="-7.7520,110.4915">Candi Prambanan</option>
+                    <option value="-7.6158,110.4230">Museum Gunungapi Merapi</option>
+                    <option value="-7.6019,110.4206">Kaliurang</option>
+                    <option value="-7.7818,110.5045">Tebing Breksi</option>
+                    <option value="-7.7965,110.5122">Obelix Hills</option>
+                    <option value="-8.0247,110.3293">Pantai Parangtritis</option>
+                    <option value="-7.9417,110.4238">Hutan Pinus Mangunan</option>
+                    <option value="-8.1505,110.6124">Pantai Indrayanti</option>
+                    <option value="-8.1286,110.5484">Pantai Baron</option>
+                    <option value="-7.9567,110.6517">Goa Pindul</option>
+                    <option value="-7.8058,110.1295">Kalibiru</option>
+                    <option value="-7.8436,110.1206">Waduk Sermo</option>
+                </select>
+            </div>
+            <p id="infoJarak"><b>Jarak:</b> - km | <b>Estimasi Waktu:</b> - menit</p>
+        </div>
+    </div>
 
 </div>
 
@@ -168,154 +187,157 @@ Waktu: -
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
 <script>
-
-// MAP
-var map = L.map('map').setView([-7.82,110.40],10);
+// INITIALIZE MAP
+var map = L.map('map').setView([-7.80, 110.40], 11);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-maxZoom:19
+    maxZoom: 19
 }).addTo(map);
 
-// DATA
-var malioboro = [-7.7929,110.3658];
-
+// DATA MAP UTAMA (Untuk Marker & Buffer)
 var wisata = [
-["Malioboro",-7.7929,110.3658,"Budaya","Kota Yogyakarta"],
-["Keraton",-7.8053,110.3642,"Budaya","Kota Yogyakarta"],
-["Taman Sari",-7.8102,110.3593,"Budaya","Kota Yogyakarta"],
-["Prambanan",-7.7520,110.4915,"Budaya","Sleman"],
-
-["Merapi",-7.6158,110.4230,"Alam","Sleman"],
-["Kaliurang",-7.6019,110.4206,"Alam","Sleman"],
-["Breksi",-7.7818,110.5045,"Alam","Sleman"],
-["Obelix",-7.7965,110.5122,"Alam","Sleman"],
-
-["Parangtritis",-8.0247,110.3293,"Pantai","Bantul"],
-["Mangunan",-7.9417,110.4238,"Alam","Bantul"],
-["Indrayanti",-8.1505,110.6124,"Pantai","Gunungkidul"],
-["Baron",-8.1286,110.5484,"Pantai","Gunungkidul"],
-["Pindul",-7.9567,110.6517,"Alam","Gunungkidul"],
-["Kalibiru",-7.8058,110.1295,"Alam","Kulon Progo"],
-["Sermo",-7.8436,110.1206,"Alam","Kulon Progo"]
+    ["Malioboro",-7.7929,110.3658,"Budaya"],
+    ["Keraton Yogyakarta",-7.8053,110.3642,"Budaya"],
+    ["Taman Sari",-7.8102,110.3593,"Budaya"],
+    ["Candi Prambanan",-7.7520,110.4915,"Budaya"],
+    ["Museum Gunungapi Merapi",-7.6158,110.4230,"Alam"],
+    ["Kaliurang",-7.6019,110.4206,"Alam"],
+    ["Tebing Breksi",-7.7818,110.5045,"Alam"],
+    ["Obelix Hills",-7.7965,110.5122,"Alam"],
+    ["Pantai Parangtritis",-8.0247,110.3293,"Pantai"],
+    ["Hutan Pinus Mangunan",-7.9417,110.4238,"Alam"],
+    ["Pantai Indrayanti",-8.1505,110.6124,"Pantai"],
+    ["Pantai Baron",-8.1286,110.5484,"Pantai"],
+    ["Goa Pindul",-7.9567,110.6517,"Alam"],
+    ["Kalibiru",-7.8058,110.1295,"Alam"],
+    ["Waduk Sermo",-7.8436,110.1206,"Alam"]
 ];
 
-// LAYER
 var budaya = L.layerGroup();
 var alam = L.layerGroup();
 var pantai = L.layerGroup();
 var buffer = L.layerGroup();
+var analisisJarakLayer = L.layerGroup();
 
-// MARKER + BUFFER
+// PLOT MARKER + BUFFER
 wisata.forEach(function(w){
+    L.marker([w[1], w[2]]).bindPopup("<b>" + w[0] + "</b>").addTo(
+        w[3] == "Budaya" ? budaya : (w[3] == "Pantai" ? pantai : alam)
+    );
 
-L.marker([w[1],w[2]]).bindPopup(w[0]).addTo(
-w[3]=="Budaya"?budaya:
-w[3]=="Pantai"?pantai:alam
-);
-
-if(w[3]=="Budaya"){
-L.circle([w[1],w[2]],{
-radius:5000,
-color:'red',
-fillOpacity:0.15
-}).addTo(buffer);
-}
-
+    if(w[3] == "Budaya" && w[0] !== "Malioboro"){
+        L.circle([w[1], w[2]], {
+            radius: 5000, 
+            color: 'red',
+            weight: 1.5,
+            fillColor: 'red',
+            fillOpacity: 0.1
+        }).addTo(buffer);
+    }
 });
 
-// ADD MAP
+// SCRIPT ANALISIS JARAK (Garis Putus-Putus)
+var semuaWisata = [
+    ["Keraton Yogyakarta",-7.8053,110.3642],
+    ["Taman Sari",-7.8102,110.3593],
+    ["Candi Prambanan",-7.7520,110.4915],
+    ["Museum Gunungapi Merapi",-7.6158,110.4230],
+    ["Kaliurang",-7.6019,110.4206],
+    ["Tebing Breksi",-7.7818,110.5045],
+    ["Obelix Hills",-7.7965,110.5122],
+    ["Pantai Parangtritis",-8.0247,110.3293],
+    ["Hutan Pinus Mangunan",-7.9417,110.4238],
+    ["Pantai Indrayanti",-8.1505,110.6124],
+    ["Pantai Baron",-8.1286,110.5484],
+    ["Goa Pindul",-7.9567,110.6517],
+    ["Kalibiru",-7.8058,110.1295],
+    ["Waduk Sermo",-7.8436,110.1206]
+];
+
+function hitungJarak(lat1, lon1, lat2, lon2){
+    var R = 6371;
+    var dLat = (lat2-lat1) * Math.PI/180;
+    var dLon = (lon2-lon1) * Math.PI/180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R*c;
+}
+
+semuaWisata.forEach(function(w){
+    var jarak = hitungJarak(-7.7929, 110.3658, w[1], w[2]).toFixed(2);
+    L.polyline([[-7.7929, 110.3658], [w[1], w[2]]], {
+        color: 'blue',
+        weight: 2,
+        dashArray: '6'
+    })
+    .bindPopup("Jarak Malioboro ke <b>"+w[0]+"</b><br>"+jarak+" km")
+    .addTo(analisisJarakLayer);
+});
+
+// ADD LAYERS TO MAP
 budaya.addTo(map);
 alam.addTo(map);
 pantai.addTo(map);
 buffer.addTo(map);
+analisisJarakLayer.addTo(map);
 
-L.control.layers(null,{
-"Budaya":budaya,
-"Alam":alam,
-"Pantai":pantai,
-"Buffer":buffer
+L.control.layers(null, {
+    "Budaya": budaya,
+    "Alam": alam,
+    "Pantai": pantai,
+    "Buffer 5km": buffer,
+    "Garis Jarak Udara": analisisJarakLayer
 }).addTo(map);
 
-// DROPDOWN
-var select = document.getElementById("selectWisata");
 
-wisata.forEach((w,i)=>{
-var opt=document.createElement("option");
-opt.value=i;
-opt.text=w[0];
-select.appendChild(opt);
+// =====================================
+// LOGIKA SCRIPT ROUTING BARU KAMU
+// =====================================
+var routingControl;
+
+var malioboro = L.latLng(-7.7929, 110.3658);
+
+document.getElementById("tujuan").addEventListener("change", function(){
+
+    var tujuan = this.value;
+
+    if(tujuan === "") {
+        document.getElementById("infoJarak").innerHTML = "<b>Jarak:</b> - km | <b>Estimasi Waktu:</b> - menit";
+        if(routingControl) map.removeControl(routingControl);
+        return;
+    }
+
+    var koordinat = tujuan.split(",");
+
+    var lat = parseFloat(koordinat[0]);
+    var lng = parseFloat(koordinat[1]);
+
+    if(routingControl){
+        map.removeControl(routingControl);
+    }
+
+    routingControl = L.Routing.control({
+        waypoints: [
+            malioboro,
+            L.latLng(lat, lng)
+        ],
+        routeWhileDragging: false,
+        addWaypoints: false,
+        draggableWaypoints: false,
+        show: true // Tetap diset true agar panel panduan rute teks muncul di kanan atas peta seperti gambar target
+    }).addTo(map);
+
+    routingControl.on('routesfound', function(e){
+        var route = e.routes[0];
+        var jarak = (route.summary.totalDistance / 1000).toFixed(2);
+        var waktu = (route.summary.totalTime / 60).toFixed(0);
+
+        document.getElementById("infoJarak").innerHTML = 
+            "<b>Jarak:</b> " + jarak + " km | <b>Estimasi Waktu:</b> " + waktu + " menit";
+    });
 });
-
-// FUNCTION DISTANCE
-function hitung(lat1,lon1,lat2,lon2){
-var R=6371;
-var dLat=(lat2-lat1)*Math.PI/180;
-var dLon=(lon2-lon1)*Math.PI/180;
-var a=Math.sin(dLat/2)**2+
-Math.cos(lat1*Math.PI/180)*
-Math.cos(lat2*Math.PI/180)*
-Math.sin(dLon/2)**2;
-return 2*R*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
-}
-
-// ROUTING
-var routeControl;
-var total=0;
-
-select.addEventListener("change",function(){
-
-var i=this.value;
-if(i==="") return;
-
-var tujuan=wisata[i];
-
-if(routeControl){
-map.removeControl(routeControl);
-}
-
-routeControl=L.Routing.control({
-waypoints:[
-L.latLng(malioboro[0],malioboro[1]),
-L.latLng(tujuan[1],tujuan[2])
-],
-show:false
-}).addTo(map);
-
-routeControl.on("routesfound",function(e){
-
-var r=e.routes[0];
-
-var km=(r.summary.totalDistance/1000).toFixed(2);
-var min=Math.round(r.summary.totalTime/60);
-
-document.getElementById("routeResult").innerHTML=
-"Jarak: "+km+" km<br>Waktu: "+min+" menit";
-
-});
-
-});
-
-// TABLE + AVG
-var tabel=document.getElementById("tabel");
-
-wisata.forEach((w,i)=>{
-
-var d=hitung(malioboro[0],malioboro[1],w[1],w[2]);
-
-total+=d;
-
-var row=tabel.insertRow();
-row.insertCell(0).innerHTML=i+1;
-row.insertCell(1).innerHTML=w[0];
-row.insertCell(2).innerHTML=w[3];
-row.insertCell(3).innerHTML=w[4];
-row.insertCell(4).innerHTML=d.toFixed(2);
-
-});
-
-document.getElementById("avg").innerHTML=
-(total/wisata.length).toFixed(2);
-
 </script>
 
 </body>
