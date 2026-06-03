@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sistem Informasi Statistik Kabupaten Sleman</title>
+<title>WebGIS Pariwisata Kabupaten Sleman</title>
 
 <link rel="stylesheet"
 href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -13,242 +13,159 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 
 body{
-    font-family: Poppins, Arial, sans-serif;
-    margin:0;
-    background:#f4f6f9;
-}
-
-.navbar{
-    background:#222;
-    padding:15px;
-    text-align:center;
-}
-
-.navbar a{
-    color:white;
-    text-decoration:none;
-    margin:0 15px;
-    font-weight:bold;
+font-family:Arial,sans-serif;
+margin:0;
+background:#f5f5f5;
 }
 
 .header{
-    text-align:center;
-    padding:30px;
-    background:linear-gradient(to right,#f9d423,#ff4e50);
-    color:white;
+background:#2c3e50;
+color:white;
+text-align:center;
+padding:25px;
 }
 
-.header img{
-    height:180px;
+.header h1{
+margin:0;
 }
 
-.info{
-    width:85%;
-    margin:20px auto;
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.15);
+.container{
+width:90%;
+margin:auto;
+padding:20px;
 }
 
 #map{
-    height:550px;
-    border-radius:10px;
+height:600px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
-.wisata{
-    width:85%;
-    margin:20px auto;
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.15);
-}
-
-.wisata img{
-    width:220px;
-    border-radius:10px;
-}
-
-.tabel-container{
-    width:90%;
-    margin:30px auto;
-}
-
-.tabel-container h2{
-    text-align:center;
-    background:#ffcc00;
-    padding:10px;
-    border-radius:10px 10px 0 0;
+.info{
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    box-shadow:0 3px 8px rgba(0,0,0,0.15);
-}
-
-th{
-    background:#f9d423;
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+background:white;
 }
 
 th,td{
-    padding:12px;
-    text-align:center;
-    border:1px solid #ddd;
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
 }
 
-tr:nth-child(even){
-    background:#fafafa;
-}
-
-tr:hover{
-    background:#fff2b3;
+th{
+background:#3498db;
+color:white;
 }
 
 footer{
-    text-align:center;
-    padding:20px;
-    background:#222;
-    color:white;
-    margin-top:30px;
+text-align:center;
+background:#2c3e50;
+color:white;
+padding:15px;
+margin-top:20px;
 }
 
 </style>
-</head>
 
+</head>
 <body>
 
-<div class="navbar">
-    <a href="#profil">Profil</a>
-    <a href="#peta">Peta</a>
-    <a href="#wisata">Wisata</a>
-    <a href="#data">Data Statistik</a>
-</div>
-
 <div class="header">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Lambang_Kabupaten_Sleman.png">
-    <h3>Sistem Informasi Statistik Berbasis Spasial</h3>
-    <h2>Kabupaten Sleman Tahun 2026</h2>
+<h1>WebGIS Pariwisata Kabupaten Sleman</h1>
+<p>Sistem Informasi Geografis Destinasi Wisata Kabupaten Sleman</p>
 </div>
 
-<div class="info" id="profil">
-    <h2>Profil Kabupaten Sleman</h2>
+<div class="container">
 
-    <p align="justify">
-    Kabupaten Sleman merupakan salah satu kabupaten di Daerah Istimewa
-    Yogyakarta yang memiliki peran penting sebagai pusat pendidikan,
-    pariwisata, dan permukiman. Kabupaten ini dikenal dengan keberadaan
-    Gunung Merapi, kawasan Kaliurang, serta berbagai destinasi wisata
-    budaya dan alam.
-    </p>
-</div>
+<div class="info">
 
-<div class="info" id="peta">
-    <h2>Peta Interaktif Kabupaten Sleman</h2>
+<h2>Tentang Aplikasi</h2>
 
-    <div id="map"></div>
-</div>
-
-<div class="wisata" id="wisata">
-
-<h2>Wisata Unggulan Kabupaten Sleman</h2>
-
-<table>
-<tr>
-<td width="250">
-
-<img src="https://travelspromo.com/wp-content/uploads/2019/03/Gedung-Museum-Gunung-Merapi.-Foto-Gmap-Adjat-Sudrajat-1200x900.jpg">
-
-</td>
-
-<td align="left">
-
-<h3>Museum Gunungapi Merapi</h3>
-
-Museum edukasi yang menyajikan informasi mengenai aktivitas Gunung Merapi,
-mitigasi bencana, dan sejarah erupsi yang pernah terjadi.
-
-</td>
-</tr>
-</table>
+<p>
+Aplikasi ini menampilkan persebaran destinasi wisata utama di Kabupaten Sleman
+berdasarkan koordinat geografis. Pengguna dapat melihat lokasi wisata pada peta
+interaktif serta memperoleh informasi singkat mengenai setiap objek wisata.
+</p>
 
 </div>
 
-<div class="tabel-container" id="data">
+<h2>Peta Persebaran Wisata</h2>
 
-<h2>Data Kependudukan Kabupaten Sleman</h2>
+<div id="map"></div>
+
+<div class="info">
+
+<h2>Data Destinasi Wisata</h2>
 
 <table>
 
 <tr>
-<th>Kecamatan</th>
+<th>No</th>
+<th>Objek Wisata</th>
 <th>Latitude</th>
 <th>Longitude</th>
-<th>Luas (km²)</th>
-<th>Jumlah Penduduk</th>
-<th>Kepadatan</th>
 </tr>
 
 <tr>
-<td>Ngaglik</td>
-<td>-7.714</td>
-<td>110.397</td>
-<td>44.45</td>
-<td>123456</td>
-<td>2778</td>
+<td>1</td>
+<td>Museum Gunungapi Merapi</td>
+<td>-7.615</td>
+<td>110.423</td>
 </tr>
 
 <tr>
-<td>Depok</td>
-<td>-7.761</td>
-<td>110.401</td>
-<td>25.18</td>
-<td>140987</td>
-<td>5598</td>
+<td>2</td>
+<td>Kaliurang</td>
+<td>-7.602</td>
+<td>110.420</td>
 </tr>
 
 <tr>
-<td>Gamping</td>
-<td>-7.800</td>
-<td>110.327</td>
-<td>42.63</td>
-<td>115343</td>
-<td>2706</td>
+<td>3</td>
+<td>Candi Prambanan</td>
+<td>-7.752</td>
+<td>110.491</td>
 </tr>
 
 <tr>
-<td>Sleman</td>
-<td>-7.699</td>
-<td>110.348</td>
-<td>39.27</td>
-<td>98764</td>
-<td>2515</td>
+<td>4</td>
+<td>Tebing Breksi</td>
+<td>-7.781</td>
+<td>110.504</td>
 </tr>
 
 <tr>
-<td>Kalasan</td>
-<td>-7.756</td>
-<td>110.473</td>
-<td>37.15</td>
-<td>102578</td>
-<td>2761</td>
+<td>5</td>
+<td>Suraloka Zoo</td>
+<td>-7.642</td>
+<td>110.412</td>
 </tr>
 
 </table>
+
+</div>
 
 </div>
 
 <footer>
-© 2026 Sistem Informasi Statistik Kabupaten Sleman Berbasis Spasial
+© 2026 WebGIS Pariwisata Kabupaten Sleman
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 
-var map = L.map('map').setView([-7.716,110.355],11);
+var map = L.map('map').setView([-7.68,110.45],11);
 
 L.tileLayer(
 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -257,34 +174,34 @@ maxZoom:19
 }
 ).addTo(map);
 
-L.marker([-7.714,110.397])
+L.marker([-7.615,110.423])
 .addTo(map)
 .bindPopup(
-"<b>Ngaglik</b><br>Penduduk : 123.456 Jiwa"
+"<b>Museum Gunungapi Merapi</b><br>Wisata Edukasi Vulkanologi"
 );
 
-L.marker([-7.761,110.401])
+L.marker([-7.602,110.420])
 .addTo(map)
 .bindPopup(
-"<b>Depok</b><br>Penduduk : 140.987 Jiwa"
+"<b>Kaliurang</b><br>Wisata Alam Lereng Merapi"
 );
 
-L.marker([-7.800,110.327])
+L.marker([-7.752,110.491])
 .addTo(map)
 .bindPopup(
-"<b>Gamping</b><br>Penduduk : 115.343 Jiwa"
+"<b>Candi Prambanan</b><br>Warisan Budaya Dunia"
 );
 
-L.marker([-7.699,110.348])
+L.marker([-7.781,110.504])
 .addTo(map)
 .bindPopup(
-"<b>Sleman</b><br>Penduduk : 98.764 Jiwa"
+"<b>Tebing Breksi</b><br>Wisata Geologi dan Panorama"
 );
 
-L.marker([-7.756,110.473])
+L.marker([-7.642,110.412])
 .addTo(map)
 .bindPopup(
-"<b>Kalasan</b><br>Penduduk : 102.578 Jiwa"
+"<b>Suraloka Zoo</b><br>Wisata Edukasi Satwa"
 );
 
 </script>
