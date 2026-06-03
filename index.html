@@ -139,21 +139,22 @@ background:#f7f7f7;
 
 .info.legend {
 background: white;
-padding: 15px;
+padding: 10px;
 font-family: inherit;
-font-size: 13px;
-line-height: 22px;
+font-size: 12px;
+line-height: 20px;
 color: #333;
-box-shadow: 0 0 15px rgba(0,0,0,0.2);
-border-radius: 8px;
+border-radius: 5px;
 border: 1px solid #ccc;
+margin: 0 !important;
+box-shadow: none;
 }
 
 .info.legend i {
-width: 16px;
-height: 16px;
+width: 14px;
+height: 14px;
 float: left;
-margin-right: 10px;
+margin-right: 8px;
 margin-top: 3px;
 opacity: 0.8;
 border-radius: 50%;
@@ -162,7 +163,7 @@ border-radius: 50%;
 .info.legend .buffer-line {
 border-radius: 0;
 height: 4px;
-margin-top: 9px;
+margin-top: 8px;
 }
 
 .leaflet-routing-container {
@@ -172,6 +173,10 @@ border-radius: 8px;
 box-shadow: 0 0 15px rgba(0,0,0,0.2);
 max-height: 280px;
 overflow-y: auto;
+}
+
+.leaflet-control-layers-list {
+margin-bottom: 0px;
 }
 
 footer{
@@ -462,12 +467,23 @@ alam.addTo(map);
 pantai.addTo(map);
 bufferBudaya.addTo(map);
 
+var legendaSimbolHTML = 
+    '<div class="info legend">' +
+    '<strong>Legenda Kategori</strong><br>' +
+    '<i style="background:red"></i> Wisata Budaya<br>' +
+    '<i style="background:green"></i> Wisata Alam<br>' +
+    '<i style="background:blue"></i> Wisata Pantai<br>' +
+    '<hr style="margin:5px 0; border:0; border-top:1px solid #eee;">' +
+    '<i class="buffer-line" style="border: 2px solid red; background:#ff6666; opacity:0.5;"></i> Buffer Wisata Budaya (5 km)' +
+    '</div>';
+
 L.control.layers(null,{
 "Wisata Budaya": budaya,
 "Wisata Alam": alam,
 "Wisata Pantai": pantai,
 "Buffer Wisata Budaya (5 km)": bufferBudaya,
-"Analisis Jarak Garis Lurus": analisisJarakLayer
+"Analisis Jarak Garis Lurus": analisisJarakLayer,
+[legendaSimbolHTML]: L.layerGroup() 
 }, {collapsed: true}).addTo(map);
 
 L.Control.geocoder({
@@ -475,19 +491,6 @@ defaultMarkGeocode:true,
 placeholder: "Cari lokasi atau daerah...",
 errorMessage: "Lokasi tidak ditemukan."
 }).addTo(map);
-
-var legend = L.control({position: 'bottomright'});
-legend.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML += '<strong>Legenda Kategori</strong><br>';
-    div.innerHTML += '<i style="background:red"></i> Wisata Budaya<br>';
-    div.innerHTML += '<i style="background:green"></i> Wisata Alam<br>';
-    div.innerHTML += '<i style="background:blue"></i> Wisata Pantai<br>';
-    div.innerHTML += '<hr style="margin:5px 0; border:0; border-top:1px solid #eee;">';
-    div.innerHTML += '<i class="buffer-line" style="border: 2px solid red; background:#ff6666; opacity:0.5;"></i> Buffer Wisata Budaya (5 km)';
-    return div;
-};
-legend.addTo(map);
 
 var routingControl;
 var malioboro = L.latLng(-7.7929, 110.3658);
