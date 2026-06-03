@@ -316,8 +316,6 @@ Radius Buffer
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/lrm-graphhopper-1.2.0.min.js"></script> 
-<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/lrm-id.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
 <script>
@@ -507,16 +505,43 @@ if(routingControl){
 map.removeControl(routingControl);
 }
 
+// PERBAIKAN: Menggunakan Formatter Teks Kustom lokal agar Bahasa Indonesia & Garis Merah Muncul Stabil
 routingControl = L.Routing.control({
 waypoints:[
 malioboro,
 L.latLng(lat,lng)
 ],
-// PERUBAHAN 2: MENAMBAHKAN CONFIG BAHASA INDONESIA DI SINI
-language: 'id', 
 routeWhileDragging:false,
 addWaypoints:false,
-draggableWaypoints:false
+draggableWaypoints:false,
+lineOptions: {
+    styles: [{ color: 'red', opacity: 0.8, weight: 6 }] // Memastikan garis rute jalan raya berwarna merah tebal
+},
+formatter: new L.Routing.Formatter({
+    language: 'id',
+    units: 'metric',
+    formatInstruction: function(instruction) {
+        // Menerjemahkan instruksi teks utama secara langsung tanpa CDN bermasalah
+        var text = instruction.text || '';
+        text = text.replace(/Head/i, 'Mulai berkendara dari');
+        text = text.replace(/North/i, 'Utara');
+        text = text.replace(/South/i, 'Selatan');
+        text = text.replace(/East/i, 'Timur');
+        text = text.replace(/West/i, 'Barat');
+        text = text.replace(/Left/i, 'Kiri');
+        text = text.replace(/Right/i, 'Kanan');
+        text = text.replace(/Turn/i, 'Belok');
+        text = text.replace(/Slight/i, 'Sedikit');
+        text = text.replace(/Sharp/i, 'Tajam');
+        text = text.replace(/Go straight/i, 'Lurus terus');
+        text = text.replace(/at the roundabout/i, 'di bundaran');
+        text = text.replace(/take the (\d+)(st|nd|rd|th) exit/i, 'ambil jalan keluar ke-$1');
+        text = text.replace(/Destination will be on the/i, 'Tujuan ada di sebelah');
+        text = text.replace(/Make a U-turn/i, 'Putar balik');
+        text = text.replace(/onto/i, 'ke');
+        return text;
+    }
+})
 }).addTo(map);
 
 routingControl.on('routesfound', function(e){
