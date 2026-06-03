@@ -4,13 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pariwisata Daerah Istimewa Yogyakarta</title>
+<title>WebGIS Analisis Persebaran Pariwisata DIY</title>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
 
 <style>
 
-{
+*{
 margin:0;
 padding:0;
 box-sizing:border-box;
@@ -18,8 +21,7 @@ box-sizing:border-box;
 
 body{
 font-family:'Segoe UI',sans-serif;
-background:#f5f6fa;
-position:relative;
+background:#f4f6f9;
 }
 
 .header{
@@ -34,13 +36,20 @@ padding:80px 20px;
 }
 
 .logo{
-width:110px;
+width:100px;
+display:block;
+margin:auto;
 margin-bottom:15px;
 }
 
-.header h1{font-size:3em;}
-.header h2{font-weight:300;margin-top:10px;}
-.header p{margin-top:15px;font-size:1.1em;}
+.header h1{
+font-size:3rem;
+}
+
+.header h2{
+font-weight:300;
+margin-top:10px;
+}
 
 .container{
 width:90%;
@@ -49,14 +58,17 @@ margin:auto;
 padding:25px;
 }
 
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+margin-bottom:25px;
+}
+
 .card h2{
 margin-bottom:15px;
 color:#2c3e50;
-}
-
-#map{
-height:650px;
-border-radius:15px;
 }
 
 .stats{
@@ -74,7 +86,11 @@ text-align:center;
 border-radius:10px;
 }
 
-/* TABLE */
+#map{
+height:650px;
+border-radius:15px;
+}
+
 table{
 width:100%;
 border-collapse:collapse;
@@ -93,7 +109,7 @@ text-align:center;
 }
 
 tr:nth-child(even){
-background:#f9f9f9;
+background:#f7f7f7;
 }
 
 footer{
@@ -101,7 +117,7 @@ background:#2c3e50;
 color:white;
 text-align:center;
 padding:20px;
-margin-top:40px;
+margin-top:30px;
 }
 
 </style>
@@ -114,20 +130,24 @@ margin-top:40px;
 <img class="logo"
 src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Coat_of_arms_of_Yogyakarta.svg">
 
-<h1>WEBGIS PARIWISATA</h1>
-<h2>DAERAH ISTIMEWA YOGYAKARTA</h2>
+<h1>WEBGIS PARIWISATA DIY</h1>
 
-<p>Sistem Informasi Geografis Destinasi Wisata DIY</p>
+<h2>Analisis Persebaran dan Aksesibilitas Destinasi Wisata</h2>
+
+<p>
+Spatial Web Programming - Daerah Istimewa Yogyakarta
+</p>
 
 </div>
 
 <div class="container">
 
 <div class="card">
+
 <h2>Tentang Aplikasi</h2>
 
 <p align="justify">
-Aplikasi WebGIS Pariwisata Daerah Istimewa Yogyakarta merupakan sistem informasi geografis berbasis web yang dirancang untuk menampilkan persebaran destinasi wisata unggulan di wilayah DIY. Aplikasi ini memanfaatkan teknologi pemetaan interaktif untuk menyajikan informasi lokasi wisata alam, budaya, sejarah, dan rekreasi secara spasial sehingga pengguna dapat memahami distribusi objek wisata.
+WebGIS ini dirancang untuk menampilkan persebaran destinasi wisata di Daerah Istimewa Yogyakarta secara interaktif. Aplikasi memanfaatkan teknologi Sistem Informasi Geografis berbasis web untuk membantu pengguna memahami distribusi objek wisata, kategori wisata, dan jangkauan pelayanan wisata melalui analisis buffer.
 </p>
 
 <div class="stats">
@@ -138,18 +158,18 @@ Kabupaten/Kota
 </div>
 
 <div class="stat-box">
-<h3>15+</h3>
+<h3>15</h3>
 Destinasi Wisata
 </div>
 
 <div class="stat-box">
-<h3>4</h3>
+<h3>3</h3>
 Kategori Wisata
 </div>
 
 <div class="stat-box">
-<h3>DIY</h3>
-Wilayah Kajian
+<h3>5 km</h3>
+Buffer Analisis
 </div>
 
 </div>
@@ -157,26 +177,31 @@ Wilayah Kajian
 </div>
 
 <div class="card">
+
 <h2>Peta Persebaran Wisata DIY</h2>
+
 <div id="map"></div>
+
 </div>
 
 <div class="card">
+
 <h2>Data Destinasi Wisata</h2>
 
 <table>
+
 <tr>
 <th>No</th>
-<th>Objek Wisata</th>
+<th>Nama Wisata</th>
 <th>Kategori</th>
 <th>Kabupaten/Kota</th>
 </tr>
 
 <tr><td>1</td><td>Malioboro</td><td>Budaya</td><td>Kota Yogyakarta</td></tr>
 <tr><td>2</td><td>Keraton Yogyakarta</td><td>Budaya</td><td>Kota Yogyakarta</td></tr>
-<tr><td>3</td><td>Taman Sari</td><td>Sejarah</td><td>Kota Yogyakarta</td></tr>
-<tr><td>4</td><td>Candi Prambanan</td><td>Cagar Budaya</td><td>Sleman</td></tr>
-<tr><td>5</td><td>Museum Gunungapi Merapi</td><td>Edukasi</td><td>Sleman</td></tr>
+<tr><td>3</td><td>Taman Sari</td><td>Budaya</td><td>Kota Yogyakarta</td></tr>
+<tr><td>4</td><td>Candi Prambanan</td><td>Budaya</td><td>Sleman</td></tr>
+<tr><td>5</td><td>Museum Gunungapi Merapi</td><td>Alam</td><td>Sleman</td></tr>
 <tr><td>6</td><td>Kaliurang</td><td>Alam</td><td>Sleman</td></tr>
 <tr><td>7</td><td>Tebing Breksi</td><td>Alam</td><td>Sleman</td></tr>
 <tr><td>8</td><td>Obelix Hills</td><td>Alam</td><td>Sleman</td></tr>
@@ -189,46 +214,125 @@ Wilayah Kajian
 <tr><td>15</td><td>Waduk Sermo</td><td>Alam</td><td>Kulon Progo</td></tr>
 
 </table>
+
 </div>
 
 </div>
 
 <footer>
-© 2026 WebGIS Pariwisata Daerah Istimewa Yogyakarta
+
+© 2026 WebGIS Analisis Persebaran Pariwisata DIY
+
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
 <script>
+
 var map = L.map('map').setView([-7.82,110.40],10);
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-maxZoom:19
+L.tileLayer(
+'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+maxZoom:19,
+attribution:'© OpenStreetMap Contributors'
+}
+).addTo(map);
+
+var budaya = L.layerGroup();
+var alam = L.layerGroup();
+var pantai = L.layerGroup();
+
+L.marker([-7.7929,110.3658])
+.bindPopup("<b>Malioboro</b><br>Wisata Budaya")
+.addTo(budaya);
+
+L.marker([-7.8053,110.3642])
+.bindPopup("<b>Keraton Yogyakarta</b><br>Wisata Budaya")
+.addTo(budaya);
+
+L.marker([-7.8102,110.3593])
+.bindPopup("<b>Taman Sari</b><br>Wisata Budaya")
+.addTo(budaya);
+
+L.marker([-7.7520,110.4915])
+.bindPopup("<b>Candi Prambanan</b><br>Wisata Budaya")
+.addTo(budaya);
+
+L.marker([-7.6158,110.4230])
+.bindPopup("<b>Museum Gunungapi Merapi</b><br>Wisata Alam")
+.addTo(alam);
+
+L.marker([-7.6019,110.4206])
+.bindPopup("<b>Kaliurang</b><br>Wisata Alam")
+.addTo(alam);
+
+L.marker([-7.7818,110.5045])
+.bindPopup("<b>Tebing Breksi</b><br>Wisata Alam")
+.addTo(alam);
+
+L.marker([-7.7965,110.5122])
+.bindPopup("<b>Obelix Hills</b><br>Wisata Alam")
+.addTo(alam);
+
+L.marker([-7.9417,110.4238])
+.bindPopup("<b>Hutan Pinus Mangunan</b><br>Wisata Alam")
+.addTo(alam);
+
+L.marker([-7.9567,110.6517])
+.bindPopup("<b>Goa Pindul</b><br>Wisata Alam")
+.addTo(alam);
+
+L.marker([-7.8058,110.1295])
+.bindPopup("<b>Kalibiru</b><br>Wisata Alam")
+.addTo(alam);
+
+L.marker([-7.8436,110.1206])
+.bindPopup("<b>Waduk Sermo</b><br>Wisata Alam")
+.addTo(alam);
+
+L.marker([-8.0247,110.3293])
+.bindPopup("<b>Pantai Parangtritis</b><br>Wisata Pantai")
+.addTo(pantai);
+
+L.marker([-8.1505,110.6124])
+.bindPopup("<b>Pantai Indrayanti</b><br>Wisata Pantai")
+.addTo(pantai);
+
+L.marker([-8.1286,110.5484])
+.bindPopup("<b>Pantai Baron</b><br>Wisata Pantai")
+.addTo(pantai);
+
+budaya.addTo(map);
+alam.addTo(map);
+pantai.addTo(map);
+
+var overlayMaps = {
+"Wisata Budaya": budaya,
+"Wisata Alam": alam,
+"Wisata Pantai": pantai
+};
+
+L.control.layers(null,overlayMaps).addTo(map);
+
+L.circle(
+[-7.7929,110.3658],
+{
+radius:5000,
+color:'red',
+fillColor:'#ff6666',
+fillOpacity:0.2
+}
+)
+.addTo(map)
+.bindPopup("Buffer 5 km dari Malioboro");
+
+L.Control.geocoder({
+defaultMarkGeocode:true
 }).addTo(map);
 
-var wisata = [
-["Malioboro",-7.7929,110.3658],
-["Keraton Yogyakarta",-7.8053,110.3642],
-["Taman Sari",-7.8102,110.3593],
-["Candi Prambanan",-7.7520,110.4915],
-["Museum Gunungapi Merapi",-7.6158,110.4230],
-["Kaliurang",-7.6019,110.4206],
-["Tebing Breksi",-7.7818,110.5045],
-["Obelix Hills",-7.7965,110.5122],
-["Pantai Parangtritis",-8.0247,110.3293],
-["Hutan Pinus Mangunan",-7.9417,110.4238],
-["Pantai Indrayanti",-8.1505,110.6124],
-["Pantai Baron",-8.1286,110.5484],
-["Goa Pindul",-7.9567,110.6517],
-["Kalibiru",-7.8058,110.1295],
-["Waduk Sermo",-7.8436,110.1206]
-];
-
-wisata.forEach(function(tempat){
-L.marker([tempat[1],tempat[2]])
-.addTo(map)
-.bindPopup("<b>"+tempat[0]+"</b>");
-});
 </script>
 
 </body>
