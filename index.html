@@ -22,22 +22,6 @@ background:#f5f6fa;
 position:relative;
 }
 
-/* Ornamen Batik Global */
-body::before{
-content:"";
-position:fixed;
-top:0;
-right:0;
-width:500px;
-height:500px;
-background-image:url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Batik_pattern.svg");
-background-size:contain;
-background-repeat:no-repeat;
-opacity:0.05;
-pointer-events:none;
-z-index:-1;
-}
-
 /* HEADER */
 .header{
 background:
@@ -65,38 +49,6 @@ width:90%;
 max-width:1200px;
 margin:auto;
 padding:25px;
-}
-
-/* CARD + BATIK MODERN */
-.card{
-background:white;
-padding:25px;
-margin-top:20px;
-border-radius:15px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
-position:relative;
-overflow:hidden;
-}
-
-/* BATIK TRANSPARAN DI DALAM CARD */
-.card::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background-image:url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Batik_pattern.svg");
-background-size:250px;
-background-repeat:repeat;
-opacity:0.04;
-z-index:0;
-}
-
-/* isi card tetap di atas batik */
-.card > *{
-position:relative;
-z-index:1;
 }
 
 .card h2{
