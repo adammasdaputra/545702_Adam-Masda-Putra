@@ -7,9 +7,7 @@
 <title>WebGIS Analisis Persebaran Pariwisata DIY</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
 
 <style>
 
@@ -22,6 +20,7 @@ box-sizing:border-box;
 body{
 font-family:'Segoe UI',sans-serif;
 background:#f4f6f9;
+line-height:1.6;
 }
 
 .header{
@@ -67,8 +66,8 @@ margin-bottom:25px;
 }
 
 .card h2{
-margin-bottom:15px;
 color:#2c3e50;
+margin-bottom:15px;
 }
 
 .stats{
@@ -147,7 +146,7 @@ Spatial Web Programming - Daerah Istimewa Yogyakarta
 <h2>Tentang Aplikasi</h2>
 
 <p align="justify">
-WebGIS ini dirancang untuk menampilkan persebaran destinasi wisata di Daerah Istimewa Yogyakarta secara interaktif. Aplikasi memanfaatkan teknologi Sistem Informasi Geografis berbasis web untuk membantu pengguna memahami distribusi objek wisata, kategori wisata, dan jangkauan pelayanan wisata melalui analisis buffer.
+WebGIS ini dikembangkan untuk menampilkan persebaran destinasi wisata di Daerah Istimewa Yogyakarta berdasarkan kategori wisata. Selain visualisasi lokasi wisata, aplikasi dilengkapi dengan analisis buffer pada objek wisata budaya untuk menggambarkan zona pengaruh spasial dan mendukung kajian aksesibilitas kawasan pariwisata.
 </p>
 
 <div class="stats">
@@ -169,7 +168,7 @@ Kategori Wisata
 
 <div class="stat-box">
 <h3>5 km</h3>
-Buffer Analisis
+Radius Buffer
 </div>
 
 </div>
@@ -177,11 +176,8 @@ Buffer Analisis
 </div>
 
 <div class="card">
-
 <h2>Peta Persebaran Wisata DIY</h2>
-
 <div id="map"></div>
-
 </div>
 
 <div class="card">
@@ -189,7 +185,6 @@ Buffer Analisis
 <h2>Data Destinasi Wisata</h2>
 
 <table>
-
 <tr>
 <th>No</th>
 <th>Nama Wisata</th>
@@ -212,7 +207,6 @@ Buffer Analisis
 <tr><td>13</td><td>Goa Pindul</td><td>Alam</td><td>Gunungkidul</td></tr>
 <tr><td>14</td><td>Kalibiru</td><td>Alam</td><td>Kulon Progo</td></tr>
 <tr><td>15</td><td>Waduk Sermo</td><td>Alam</td><td>Kulon Progo</td></tr>
-
 </table>
 
 </div>
@@ -220,13 +214,10 @@ Buffer Analisis
 </div>
 
 <footer>
-
 © 2026 WebGIS Analisis Persebaran Pariwisata DIY
-
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
 <script>
@@ -244,90 +235,77 @@ attribution:'© OpenStreetMap Contributors'
 var budaya = L.layerGroup();
 var alam = L.layerGroup();
 var pantai = L.layerGroup();
+var bufferBudaya = L.layerGroup();
 
-L.marker([-7.7929,110.3658])
-.bindPopup("<b>Malioboro</b><br>Wisata Budaya")
+/* WISATA BUDAYA */
+
+[
+["Malioboro",-7.7929,110.3658],
+["Keraton Yogyakarta",-7.8053,110.3642],
+["Taman Sari",-7.8102,110.3593],
+["Candi Prambanan",-7.7520,110.4915]
+].forEach(function(w){
+
+L.marker([w[1],w[2]])
+.bindPopup("<b>"+w[0]+"</b><br>Wisata Budaya")
 .addTo(budaya);
 
-L.marker([-7.8053,110.3642])
-.bindPopup("<b>Keraton Yogyakarta</b><br>Wisata Budaya")
-.addTo(budaya);
+L.circle([w[1],w[2]],{
+radius:5000,
+color:'red',
+weight:2,
+fillColor:'#ff6666',
+fillOpacity:0.15
+})
+.bindPopup("Zona Pengaruh Wisata Budaya (5 km)")
+.addTo(bufferBudaya);
 
-L.marker([-7.8102,110.3593])
-.bindPopup("<b>Taman Sari</b><br>Wisata Budaya")
-.addTo(budaya);
+});
 
-L.marker([-7.7520,110.4915])
-.bindPopup("<b>Candi Prambanan</b><br>Wisata Budaya")
-.addTo(budaya);
+/* WISATA ALAM */
 
-L.marker([-7.6158,110.4230])
-.bindPopup("<b>Museum Gunungapi Merapi</b><br>Wisata Alam")
+[
+["Museum Gunungapi Merapi",-7.6158,110.4230],
+["Kaliurang",-7.6019,110.4206],
+["Tebing Breksi",-7.7818,110.5045],
+["Obelix Hills",-7.7965,110.5122],
+["Hutan Pinus Mangunan",-7.9417,110.4238],
+["Goa Pindul",-7.9567,110.6517],
+["Kalibiru",-7.8058,110.1295],
+["Waduk Sermo",-7.8436,110.1206]
+].forEach(function(w){
+
+L.marker([w[1],w[2]])
+.bindPopup("<b>"+w[0]+"</b><br>Wisata Alam")
 .addTo(alam);
 
-L.marker([-7.6019,110.4206])
-.bindPopup("<b>Kaliurang</b><br>Wisata Alam")
-.addTo(alam);
+});
 
-L.marker([-7.7818,110.5045])
-.bindPopup("<b>Tebing Breksi</b><br>Wisata Alam")
-.addTo(alam);
+/* WISATA PANTAI */
 
-L.marker([-7.7965,110.5122])
-.bindPopup("<b>Obelix Hills</b><br>Wisata Alam")
-.addTo(alam);
+[
+["Pantai Parangtritis",-8.0247,110.3293],
+["Pantai Indrayanti",-8.1505,110.6124],
+["Pantai Baron",-8.1286,110.5484]
+].forEach(function(w){
 
-L.marker([-7.9417,110.4238])
-.bindPopup("<b>Hutan Pinus Mangunan</b><br>Wisata Alam")
-.addTo(alam);
-
-L.marker([-7.9567,110.6517])
-.bindPopup("<b>Goa Pindul</b><br>Wisata Alam")
-.addTo(alam);
-
-L.marker([-7.8058,110.1295])
-.bindPopup("<b>Kalibiru</b><br>Wisata Alam")
-.addTo(alam);
-
-L.marker([-7.8436,110.1206])
-.bindPopup("<b>Waduk Sermo</b><br>Wisata Alam")
-.addTo(alam);
-
-L.marker([-8.0247,110.3293])
-.bindPopup("<b>Pantai Parangtritis</b><br>Wisata Pantai")
+L.marker([w[1],w[2]])
+.bindPopup("<b>"+w[0]+"</b><br>Wisata Pantai")
 .addTo(pantai);
 
-L.marker([-8.1505,110.6124])
-.bindPopup("<b>Pantai Indrayanti</b><br>Wisata Pantai")
-.addTo(pantai);
-
-L.marker([-8.1286,110.5484])
-.bindPopup("<b>Pantai Baron</b><br>Wisata Pantai")
-.addTo(pantai);
+});
 
 budaya.addTo(map);
 alam.addTo(map);
 pantai.addTo(map);
+bufferBudaya.addTo(map);
 
-var overlayMaps = {
+L.control.layers(null,{
 "Wisata Budaya": budaya,
 "Wisata Alam": alam,
-"Wisata Pantai": pantai
-};
-
-L.control.layers(null,overlayMaps).addTo(map);
-
-L.circle(
-[-7.7929,110.3658],
-{
-radius:5000,
-color:'red',
-fillColor:'#ff6666',
-fillOpacity:0.2
-}
-)
-.addTo(map)
-.bindPopup("Buffer 5 km dari Malioboro");
+"Wisata Pantai": pantai,
+"Buffer Wisata Budaya (5 km)": bufferBudaya
+}).addTo(map);
 
 L.Control.geocoder({
 defaultMarkGeocode:true
