@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css">
 
 <style>
 
@@ -311,6 +312,80 @@ L.Control.geocoder({
 defaultMarkGeocode:true
 }).addTo(map);
 
+/* =====================================
+   ANALISIS JARAK DARI MALIOBORO
+===================================== */
+
+var malioboro = [-7.7929,110.3658];
+
+var semuaWisata = [
+["Keraton Yogyakarta",-7.8053,110.3642],
+["Taman Sari",-7.8102,110.3593],
+["Candi Prambanan",-7.7520,110.4915],
+["Museum Gunungapi Merapi",-7.6158,110.4230],
+["Kaliurang",-7.6019,110.4206],
+["Tebing Breksi",-7.7818,110.5045],
+["Obelix Hills",-7.7965,110.5122],
+["Pantai Parangtritis",-8.0247,110.3293],
+["Hutan Pinus Mangunan",-7.9417,110.4238],
+["Pantai Indrayanti",-8.1505,110.6124],
+["Pantai Baron",-8.1286,110.5484],
+["Goa Pindul",-7.9567,110.6517],
+["Kalibiru",-7.8058,110.1295],
+["Waduk Sermo",-7.8436,110.1206]
+];
+
+/* Fungsi menghitung jarak */
+
+function hitungJarak(lat1, lon1, lat2, lon2){
+
+var R = 6371;
+
+var dLat = (lat2-lat1) * Math.PI/180;
+var dLon = (lon2-lon1) * Math.PI/180;
+
+var a =
+Math.sin(dLat/2) * Math.sin(dLat/2) +
+Math.cos(lat1*Math.PI/180) *
+Math.cos(lat2*Math.PI/180) *
+Math.sin(dLon/2) *
+Math.sin(dLon/2);
+
+var c = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+
+return R*c;
+
+}
+
+/* Membuat garis dan popup jarak */
+
+semuaWisata.forEach(function(w){
+
+var jarak = hitungJarak(
+malioboro[0],
+malioboro[1],
+w[1],
+w[2]
+).toFixed(2);
+
+L.polyline(
+[
+malioboro,
+[w[1],w[2]]
+],
+{
+color:'blue',
+weight:2,
+dashArray:'6'
+}
+)
+.addTo(map)
+.bindPopup(
+"Jarak Malioboro ke <b>"+w[0]+"</b><br>"+
+jarak+" km"
+);
+
+});
 </script>
 
 </body>
