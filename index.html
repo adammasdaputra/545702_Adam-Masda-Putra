@@ -111,7 +111,6 @@ font-size: 1.05rem;
 color: #2c3e50;
 }
 
-/* KONTINER TABEL AGAR BISA DI-SCROLL DI MOBILE */
 .table-responsive {
 width: 100%;
 overflow-x: auto;
@@ -147,24 +146,21 @@ padding:20px;
 margin-top:30px;
 }
 
-/* ========================================================
-   MEDIAS QUERIES (OPTIMASI RESPONSIVE UNTUK LAYAR MOBILE)
-   ======================================================== */
 @media (max-width: 768px) {
     .header {
-        padding: 40px 15px; /* Kurangi padding header di HP */
+        padding: 40px 15px;
     }
     
     .header h1 {
-        font-size: 1.8rem; /* Perkecil ukuran judul utama di HP */
+        font-size: 1.8rem;
     }
 
     .header h2 {
-        font-size: 1.1rem; /* Perkecil sub-judul di HP */
+        font-size: 1.1rem;
     }
 
     .container {
-        width: 100%; /* Gunakan lebar penuh di HP agar space maksimal */
+        width: 100%;
         padding: 12px;
     }
 
@@ -175,11 +171,10 @@ margin-top:30px;
     }
 
     #map {
-        height: 400px; /* Perkecil tinggi peta di HP agar tidak terlalu memakan layar */
+        height: 400px;
         border-radius: 10px;
     }
 
-    /* Penataan dropdown routing agar turun ke bawah secara vertikal di HP */
     .route-selector-container {
         display: flex;
         flex-direction: column;
@@ -187,12 +182,10 @@ margin-top:30px;
     }
 
     .route-selector-container select {
-        margin-left: 0; /* Hilangkan margin kiri pada mobile */
-        width: 100%; /* Lebar dropdown penuh di layar HP */
+        margin-left: 0;
+        width: 100%;
     }
 
-    /* Sembunyikan panel rute panduan teks bawaan Leaflet Routing di kanan atas 
-       agar tidak menutupi peta yang kecil di layar HP */
     .leaflet-routing-container {
         max-width: 280px !important;
         font-size: 11px !important;
@@ -323,6 +316,8 @@ Radius Buffer
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/lrm-graphhopper-1.2.0.min.js"></script> 
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/lrm-id.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
 <script>
@@ -517,6 +512,8 @@ waypoints:[
 malioboro,
 L.latLng(lat,lng)
 ],
+// PERUBAHAN 2: MENAMBAHKAN CONFIG BAHASA INDONESIA DI SINI
+language: 'id', 
 routeWhileDragging:false,
 addWaypoints:false,
 draggableWaypoints:false
