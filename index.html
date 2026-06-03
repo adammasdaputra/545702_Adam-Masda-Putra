@@ -5,105 +5,213 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>WebGIS Pariwisata Kabupaten Sleman</title>
+<title>WebGIS Pariwisata Daerah Istimewa Yogyakarta</title>
 
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
 
-body{
-font-family:Arial,sans-serif;
+*{
 margin:0;
-background:#f5f5f5;
+padding:0;
+box-sizing:border-box;
 }
 
+body{
+font-family:'Segoe UI',sans-serif;
+background:#f5f6fa;
+position:relative;
+}
+
+/* Ornamen Batik */
+body::before{
+content:"";
+position:fixed;
+top:0;
+right:0;
+width:500px;
+height:500px;
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Batik_pattern.svg/1024px-Batik_pattern.svg.png");
+background-size:contain;
+background-repeat:no-repeat;
+opacity:0.05;
+pointer-events:none;
+z-index:-1;
+}
+
+/* Header */
 .header{
-background:#2c3e50;
+background:
+linear-gradient(rgba(0,0,0,0.55),
+rgba(0,0,0,0.55)),
+url("https://images.unsplash.com/photo-1604999333679-b86d54738315?q=80&w=1600");
+
+background-size:cover;
+background-position:center;
+
 color:white;
 text-align:center;
-padding:25px;
+padding:80px 20px;
+}
+
+.logo{
+width:110px;
+margin-bottom:15px;
 }
 
 .header h1{
-margin:0;
+font-size:3em;
 }
 
+.header h2{
+font-weight:300;
+margin-top:10px;
+}
+
+.header p{
+margin-top:15px;
+font-size:1.1em;
+}
+
+/* Konten */
 .container{
 width:90%;
+max-width:1200px;
 margin:auto;
-padding:20px;
+padding:25px;
 }
 
-#map{
-height:600px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
-}
-
-.info{
+.card{
 background:white;
-padding:20px;
+padding:25px;
 margin-top:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+border-radius:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
+.card h2{
+margin-bottom:15px;
+color:#2c3e50;
+}
+
+/* Peta */
+#map{
+height:650px;
+border-radius:15px;
+}
+
+/* Statistik */
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.stat-box{
+background:#2c3e50;
+color:white;
+padding:20px;
+text-align:center;
+border-radius:10px;
+}
+
+/* Tabel */
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:20px;
-background:white;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:10px;
-text-align:center;
+margin-top:15px;
 }
 
 th{
-background:#3498db;
+background:#2c3e50;
 color:white;
 }
 
-footer{
+th,td{
+padding:12px;
+border:1px solid #ddd;
 text-align:center;
+}
+
+tr:nth-child(even){
+background:#f9f9f9;
+}
+
+/* Footer */
+footer{
 background:#2c3e50;
 color:white;
-padding:15px;
-margin-top:20px;
+text-align:center;
+padding:20px;
+margin-top:40px;
 }
 
 </style>
-
 </head>
+
 <body>
 
 <div class="header">
-<h1>WebGIS Pariwisata Kabupaten Sleman</h1>
-<p>Sistem Informasi Geografis Destinasi Wisata Kabupaten Sleman</p>
-</div>
 
-<div class="container">
+<img class="logo"
+src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Coat_of_arms_of_Yogyakarta.svg">
 
-<div class="info">
+<h1>WEBGIS PARIWISATA</h1>
 
-<h2>Tentang Aplikasi</h2>
+<h2>DAERAH ISTIMEWA YOGYAKARTA</h2>
 
 <p>
-Aplikasi ini menampilkan persebaran destinasi wisata utama di Kabupaten Sleman
-berdasarkan koordinat geografis. Pengguna dapat melihat lokasi wisata pada peta
-interaktif serta memperoleh informasi singkat mengenai setiap objek wisata.
+Sistem Informasi Geografis Destinasi Wisata DIY
 </p>
 
 </div>
 
-<h2>Peta Persebaran Wisata</h2>
+<div class="container">
+
+<div class="card">
+
+<h2>Tentang Aplikasi</h2>
+
+<p align="justify">
+Aplikasi WebGIS Pariwisata Daerah Istimewa Yogyakarta merupakan sistem informasi geografis berbasis web yang dirancang untuk menampilkan persebaran destinasi wisata unggulan di wilayah DIY. Aplikasi ini memanfaatkan teknologi pemetaan interaktif untuk menyajikan informasi lokasi wisata alam, budaya, sejarah, dan rekreasi secara spasial sehingga pengguna dapat memahami distribusi objek wisata, memperoleh informasi lokasi, serta mendukung promosi dan pengembangan sektor pariwisata daerah.
+</p>
+
+<div class="stats">
+
+<div class="stat-box">
+<h3>5</h3>
+Kabupaten/Kota
+</div>
+
+<div class="stat-box">
+<h3>15+</h3>
+Destinasi Wisata
+</div>
+
+<div class="stat-box">
+<h3>4</h3>
+Kategori Wisata
+</div>
+
+<div class="stat-box">
+<h3>DIY</h3>
+Wilayah Kajian
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Peta Persebaran Wisata DIY</h2>
 
 <div id="map"></div>
 
-<div class="info">
+</div>
+
+<div class="card">
 
 <h2>Data Destinasi Wisata</h2>
 
@@ -112,44 +220,25 @@ interaktif serta memperoleh informasi singkat mengenai setiap objek wisata.
 <tr>
 <th>No</th>
 <th>Objek Wisata</th>
-<th>Latitude</th>
-<th>Longitude</th>
+<th>Kategori</th>
+<th>Kabupaten/Kota</th>
 </tr>
 
-<tr>
-<td>1</td>
-<td>Museum Gunungapi Merapi</td>
-<td>-7.615</td>
-<td>110.423</td>
-</tr>
-
-<tr>
-<td>2</td>
-<td>Kaliurang</td>
-<td>-7.602</td>
-<td>110.420</td>
-</tr>
-
-<tr>
-<td>3</td>
-<td>Candi Prambanan</td>
-<td>-7.752</td>
-<td>110.491</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td>Tebing Breksi</td>
-<td>-7.781</td>
-<td>110.504</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td>Suraloka Zoo</td>
-<td>-7.642</td>
-<td>110.412</td>
-</tr>
+<tr><td>1</td><td>Malioboro</td><td>Budaya</td><td>Kota Yogyakarta</td></tr>
+<tr><td>2</td><td>Keraton Yogyakarta</td><td>Budaya</td><td>Kota Yogyakarta</td></tr>
+<tr><td>3</td><td>Taman Sari</td><td>Sejarah</td><td>Kota Yogyakarta</td></tr>
+<tr><td>4</td><td>Candi Prambanan</td><td>Cagar Budaya</td><td>Sleman</td></tr>
+<tr><td>5</td><td>Museum Gunungapi Merapi</td><td>Edukasi</td><td>Sleman</td></tr>
+<tr><td>6</td><td>Kaliurang</td><td>Alam</td><td>Sleman</td></tr>
+<tr><td>7</td><td>Tebing Breksi</td><td>Alam</td><td>Sleman</td></tr>
+<tr><td>8</td><td>Obelix Hills</td><td>Alam</td><td>Sleman</td></tr>
+<tr><td>9</td><td>Pantai Parangtritis</td><td>Pantai</td><td>Bantul</td></tr>
+<tr><td>10</td><td>Hutan Pinus Mangunan</td><td>Alam</td><td>Bantul</td></tr>
+<tr><td>11</td><td>Pantai Indrayanti</td><td>Pantai</td><td>Gunungkidul</td></tr>
+<tr><td>12</td><td>Pantai Baron</td><td>Pantai</td><td>Gunungkidul</td></tr>
+<tr><td>13</td><td>Goa Pindul</td><td>Alam</td><td>Gunungkidul</td></tr>
+<tr><td>14</td><td>Kalibiru</td><td>Alam</td><td>Kulon Progo</td></tr>
+<tr><td>15</td><td>Waduk Sermo</td><td>Alam</td><td>Kulon Progo</td></tr>
 
 </table>
 
@@ -158,14 +247,14 @@ interaktif serta memperoleh informasi singkat mengenai setiap objek wisata.
 </div>
 
 <footer>
-© 2026 WebGIS Pariwisata Kabupaten Sleman
+© 2026 WebGIS Pariwisata Daerah Istimewa Yogyakarta
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 
-var map = L.map('map').setView([-7.68,110.45],11);
+var map = L.map('map').setView([-7.82,110.40],10);
 
 L.tileLayer(
 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -174,35 +263,35 @@ maxZoom:19
 }
 ).addTo(map);
 
-L.marker([-7.615,110.423])
+var wisata = [
+
+["Malioboro",-7.7929,110.3658],
+["Keraton Yogyakarta",-7.8053,110.3642],
+["Taman Sari",-7.8102,110.3593],
+["Candi Prambanan",-7.7520,110.4915],
+["Museum Gunungapi Merapi",-7.6158,110.4230],
+["Kaliurang",-7.6019,110.4206],
+["Tebing Breksi",-7.7818,110.5045],
+["Obelix Hills",-7.7965,110.5122],
+["Pantai Parangtritis",-8.0247,110.3293],
+["Hutan Pinus Mangunan",-7.9417,110.4238],
+["Pantai Indrayanti",-8.1505,110.6124],
+["Pantai Baron",-8.1286,110.5484],
+["Goa Pindul",-7.9567,110.6517],
+["Kalibiru",-7.8058,110.1295],
+["Waduk Sermo",-7.8436,110.1206]
+
+];
+
+wisata.forEach(function(tempat){
+
+L.marker([tempat[1],tempat[2]])
 .addTo(map)
 .bindPopup(
-"<b>Museum Gunungapi Merapi</b><br>Wisata Edukasi Vulkanologi"
+"<b>"+tempat[0]+"</b>"
 );
 
-L.marker([-7.602,110.420])
-.addTo(map)
-.bindPopup(
-"<b>Kaliurang</b><br>Wisata Alam Lereng Merapi"
-);
-
-L.marker([-7.752,110.491])
-.addTo(map)
-.bindPopup(
-"<b>Candi Prambanan</b><br>Warisan Budaya Dunia"
-);
-
-L.marker([-7.781,110.504])
-.addTo(map)
-.bindPopup(
-"<b>Tebing Breksi</b><br>Wisata Geologi dan Panorama"
-);
-
-L.marker([-7.642,110.412])
-.addTo(map)
-.bindPopup(
-"<b>Suraloka Zoo</b><br>Wisata Edukasi Satwa"
-);
+});
 
 </script>
 
