@@ -165,6 +165,15 @@ height: 4px;
 margin-top: 9px;
 }
 
+.leaflet-routing-container {
+background-color: white;
+padding: 15px;
+border-radius: 8px;
+box-shadow: 0 0 15px rgba(0,0,0,0.2);
+max-height: 300px;
+overflow-y: auto;
+}
+
 footer{
 background:#2c3e50;
 color:white;
@@ -507,10 +516,8 @@ L.latLng(lat,lng)
 routeWhileDragging:false,
 addWaypoints:false,
 draggableWaypoints:false,
-show: false,
-createMarker: function(i, wp, nWps) {
-    return null; 
-}
+position: 'bottomleft',
+show: true
 }).addTo(map);
 
 routingControl.on('routesfound', function(e){
