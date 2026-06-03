@@ -111,6 +111,7 @@ font-size: 1.05rem;
 color: #2c3e50;
 }
 
+/* KONTINER TABEL AGAR BISA DI-SCROLL DI MOBILE */
 .table-responsive {
 width: 100%;
 overflow-x: auto;
@@ -146,21 +147,24 @@ padding:20px;
 margin-top:30px;
 }
 
+/* ========================================================
+   MEDIAS QUERIES (OPTIMASI RESPONSIVE UNTUK LAYAR MOBILE)
+   ======================================================== */
 @media (max-width: 768px) {
     .header {
-        padding: 40px 15px;
+        padding: 40px 15px; /* Kurangi padding header di HP */
     }
     
     .header h1 {
-        font-size: 1.8rem;
+        font-size: 1.8rem; /* Perkecil ukuran judul utama di HP */
     }
 
     .header h2 {
-        font-size: 1.1rem;
+        font-size: 1.1rem; /* Perkecil sub-judul di HP */
     }
 
     .container {
-        width: 100%;
+        width: 100%; /* Gunakan lebar penuh di HP agar space maksimal */
         padding: 12px;
     }
 
@@ -171,10 +175,11 @@ margin-top:30px;
     }
 
     #map {
-        height: 400px;
+        height: 400px; /* Perkecil tinggi peta di HP agar tidak terlalu memakan layar */
         border-radius: 10px;
     }
 
+    /* Penataan dropdown routing agar turun ke bawah secara vertikal di HP */
     .route-selector-container {
         display: flex;
         flex-direction: column;
@@ -182,10 +187,12 @@ margin-top:30px;
     }
 
     .route-selector-container select {
-        margin-left: 0;
-        width: 100%;
+        margin-left: 0; /* Hilangkan margin kiri pada mobile */
+        width: 100%; /* Lebar dropdown penuh di layar HP */
     }
 
+    /* Sembunyikan panel rute panduan teks bawaan Leaflet Routing di kanan atas 
+       agar tidak menutupi peta yang kecil di layar HP */
     .leaflet-routing-container {
         max-width: 280px !important;
         font-size: 11px !important;
@@ -505,7 +512,6 @@ if(routingControl){
 map.removeControl(routingControl);
 }
 
-// PERBAIKAN: Menggunakan Formatter Teks Kustom lokal agar Bahasa Indonesia & Garis Merah Muncul Stabil
 routingControl = L.Routing.control({
 waypoints:[
 malioboro,
@@ -513,35 +519,7 @@ L.latLng(lat,lng)
 ],
 routeWhileDragging:false,
 addWaypoints:false,
-draggableWaypoints:false,
-lineOptions: {
-    styles: [{ color: 'red', opacity: 0.8, weight: 6 }] // Memastikan garis rute jalan raya berwarna merah tebal
-},
-formatter: new L.Routing.Formatter({
-    language: 'id',
-    units: 'metric',
-    formatInstruction: function(instruction) {
-        // Menerjemahkan instruksi teks utama secara langsung tanpa CDN bermasalah
-        var text = instruction.text || '';
-        text = text.replace(/Head/i, 'Mulai berkendara dari');
-        text = text.replace(/North/i, 'Utara');
-        text = text.replace(/South/i, 'Selatan');
-        text = text.replace(/East/i, 'Timur');
-        text = text.replace(/West/i, 'Barat');
-        text = text.replace(/Left/i, 'Kiri');
-        text = text.replace(/Right/i, 'Kanan');
-        text = text.replace(/Turn/i, 'Belok');
-        text = text.replace(/Slight/i, 'Sedikit');
-        text = text.replace(/Sharp/i, 'Tajam');
-        text = text.replace(/Go straight/i, 'Lurus terus');
-        text = text.replace(/at the roundabout/i, 'di bundaran');
-        text = text.replace(/take the (\d+)(st|nd|rd|th) exit/i, 'ambil jalan keluar ke-$1');
-        text = text.replace(/Destination will be on the/i, 'Tujuan ada di sebelah');
-        text = text.replace(/Make a U-turn/i, 'Putar balik');
-        text = text.replace(/onto/i, 'ke');
-        return text;
-    }
-})
+draggableWaypoints:false
 }).addTo(map);
 
 routingControl.on('routesfound', function(e){
